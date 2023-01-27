@@ -1,0 +1,10 @@
+{
+    "$schema": "http://json.schemastore.org/template",
+    "author": "Gabriel Veit",
+    "classifications": [ "CleanArchitecture"],
+    "identity": "GabrielVeit.CleanArchitecture.SimpleDotnetTemplate",
+    "name": "Simple Dotnet Template",
+    "shortName": "sdt",
+    "sourceName": "SimpleDotnetTemplate",
+    "preferNameDirectory": true
+}
