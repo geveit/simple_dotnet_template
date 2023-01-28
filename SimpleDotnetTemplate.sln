@@ -11,6 +11,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleDotnetTemplate.Core",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleDotnetTemplate.Infrastructure", "src\SimpleDotnetTemplate.Infrastructure\SimpleDotnetTemplate.Infrastructure.csproj", "{E0CBD7DE-CEC2-4AEA-B4BC-815A52D7CC59}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{9AAE05AB-EBEE-4BC5-9651-B3B4F4246328}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleDotnetTemplate.Tests.Integration", "tests\SimpleDotnetTemplate.Tests.Integration\SimpleDotnetTemplate.Tests.Integration.csproj", "{19B94B54-2206-4976-88D9-CAB3A7B80A41}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -32,10 +36,15 @@ Global
 		{E0CBD7DE-CEC2-4AEA-B4BC-815A52D7CC59}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E0CBD7DE-CEC2-4AEA-B4BC-815A52D7CC59}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E0CBD7DE-CEC2-4AEA-B4BC-815A52D7CC59}.Release|Any CPU.Build.0 = Release|Any CPU
+		{19B94B54-2206-4976-88D9-CAB3A7B80A41}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{19B94B54-2206-4976-88D9-CAB3A7B80A41}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{19B94B54-2206-4976-88D9-CAB3A7B80A41}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{19B94B54-2206-4976-88D9-CAB3A7B80A41}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{2914999A-FC1B-4FB6-BA9A-65ED06C655FC} = {F08071B9-0DB2-49AF-BF44-4384E333A559}
 		{5CA65115-AA1F-4B8C-B95F-CCE9EE62B8E5} = {F08071B9-0DB2-49AF-BF44-4384E333A559}
 		{E0CBD7DE-CEC2-4AEA-B4BC-815A52D7CC59} = {F08071B9-0DB2-49AF-BF44-4384E333A559}
+		{19B94B54-2206-4976-88D9-CAB3A7B80A41} = {9AAE05AB-EBEE-4BC5-9651-B3B4F4246328}
 	EndGlobalSection
 EndGlobal
