@@ -16,9 +16,47 @@ namespace SimpleDotnetTemplate.Tests.Integration.Common
 {
     public class CustomWebApplicationFactory : WebApplicationFactory<Program>
     {
+        private static readonly object _lock = new();
+        private static bool _databaseInitialized = false;
+
         protected override void ConfigureWebHost(IWebHostBuilder builder)
         {
-            builder.UseEnvironment("Development");
+            builder.ConfigureServices(services =>
+            {
+                var dbContextDescriptor = services.SingleOrDefault(d => d.ServiceType == typeof(DbContextOptions<ApplicationContext>));
+                services.Remove(dbContextDescriptor);
+
+                services.AddDbContext<ApplicationContext>((container, options) =>
+                {
+                    options.UseInMemoryDatabase("TestDatabase");
+                });
+            });
+
+            builder.UseEnvironment("Test");
+        }
+
+        public void InitDatabase()
+        {
+            lock (_lock)
+            {
+                if (!_databaseInitialized)
+                {
+                    using (var scope = Services.CreateScope())
+                    {
+                        using (var context = scope.ServiceProvider.GetRequiredService<ApplicationContext>())
+                        {
+                            context.Database.EnsureDeleted();
+                            context.Database.EnsureCreated();
+
+                            context.SeedUsers();
+
+                            context.SaveChanges();
+                        }
+                    }
+
+                    _databaseInitialized = true;
+                }
+            }
         }
 
         public HttpClient CreateAuthorizedClient()

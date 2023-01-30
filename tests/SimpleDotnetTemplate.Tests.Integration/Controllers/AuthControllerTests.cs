@@ -17,14 +17,16 @@ namespace SimpleDotnetTemplate.Tests.Integration.Controllers
         public AuthControllerTests(CustomWebApplicationFactory factory)
         {
             _factory = factory;
+            _factory.InitDatabase();
         }
 
         [Fact]
         public async Task Post_ReturnsTokenForCorrectCredentials()
         {
+
             var client = _factory.CreateClient();
 
-            var input = new AuthInput() { Email = "string", Password = "string" };
+            var input = new AuthInput() { Email = "email@email.com", Password = "password" };
 
             var content = JsonContent.Create<AuthInput>(input);
 
