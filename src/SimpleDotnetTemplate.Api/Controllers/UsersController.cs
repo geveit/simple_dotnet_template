@@ -11,7 +11,7 @@ namespace SimpleDotnetTemplate.Api.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    [AllowAnonymous]
+    [Authorize]
     public class UsersController : ControllerBase
     {
         private readonly IUserService _userService;

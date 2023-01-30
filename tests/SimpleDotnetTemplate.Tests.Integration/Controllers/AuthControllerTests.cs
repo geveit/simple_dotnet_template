@@ -6,14 +6,15 @@ using System.Net.Http.Json;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc.Testing;
 using SimpleDotnetTemplate.Core.Users.Dto;
+using SimpleDotnetTemplate.Tests.Integration.Common;
 
-namespace SimpleDotnetTemplate.Tests.Integration
+namespace SimpleDotnetTemplate.Tests.Integration.Controllers
 {
-    public class AuthControllerTests : IClassFixture<WebApplicationFactory<Program>>
+    public class AuthControllerTests : IClassFixture<CustomWebApplicationFactory>
     {
-        private readonly WebApplicationFactory<Program> _factory;
+        private readonly CustomWebApplicationFactory _factory;
 
-        public AuthControllerTests(WebApplicationFactory<Program> factory)
+        public AuthControllerTests(CustomWebApplicationFactory factory)
         {
             _factory = factory;
         }

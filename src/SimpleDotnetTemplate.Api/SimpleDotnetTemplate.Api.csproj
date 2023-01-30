@@ -13,12 +13,13 @@
     <PackageReference Include="EFCore.NamingConventions" Version="7.0.2"/>
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="7.0.2"/>
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.0"/>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="7.0.2"/>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\SimpleDotnetTemplate.Core\SimpleDotnetTemplate.Core.csproj"/>
     <ProjectReference Include="..\SimpleDotnetTemplate.Infrastructure\SimpleDotnetTemplate.Infrastructure.csproj"/>
   </ItemGroup>
   <ItemGroup>
-     <InternalsVisibleTo Include="..\..\tests\SimpleDotnetTemplate.Tests.Integration\SimpleDotnetTemplate.Tests.Integration.csproj" />
+    <InternalsVisibleTo Include="..\..\tests\SimpleDotnetTemplate.Tests.Integration\SimpleDotnetTemplate.Tests.Integration.csproj"/>
   </ItemGroup>
 </Project>
