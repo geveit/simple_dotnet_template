@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.Data.Sqlite;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using SimpleDotnetTemplate.Core.Users;
 using SimpleDotnetTemplate.Core.Users.Interfaces;
 using SimpleDotnetTemplate.Infrastructure.Data;
@@ -16,8 +17,29 @@ namespace SimpleDotnetTemplate.Tests.Integration.Common
 {
     public class CustomWebApplicationFactory : WebApplicationFactory<Program>
     {
-        private static readonly object _lock = new();
-        private static bool _databaseInitialized = false;
+        private readonly object _lock = new();
+
+        protected override IHost CreateHost(IHostBuilder builder)
+        {
+            builder.UseEnvironment("Test");
+
+            var host = builder.Build();
+            host.Start();
+
+            using (var scope = host.Services.CreateScope())
+            {
+                var context = scope.ServiceProvider.GetRequiredService<ApplicationContext>();
+
+                context.Database.EnsureDeleted();
+                context.Database.EnsureCreated();
+
+                context.PopulateDatabase();
+
+                context.SaveChanges();
+            }
+
+            return host;
+        }
 
         protected override void ConfigureWebHost(IWebHostBuilder builder)
         {
@@ -26,37 +48,13 @@ namespace SimpleDotnetTemplate.Tests.Integration.Common
                 var dbContextDescriptor = services.SingleOrDefault(d => d.ServiceType == typeof(DbContextOptions<ApplicationContext>));
                 services.Remove(dbContextDescriptor);
 
+                string databaseName = Guid.NewGuid().ToString();
+
                 services.AddDbContext<ApplicationContext>((container, options) =>
                 {
-                    options.UseInMemoryDatabase("TestDatabase");
+                    options.UseInMemoryDatabase(databaseName);
                 });
             });
-
-            builder.UseEnvironment("Test");
-        }
-
-        public void InitDatabase()
-        {
-            lock (_lock)
-            {
-                if (!_databaseInitialized)
-                {
-                    using (var scope = Services.CreateScope())
-                    {
-                        using (var context = scope.ServiceProvider.GetRequiredService<ApplicationContext>())
-                        {
-                            context.Database.EnsureDeleted();
-                            context.Database.EnsureCreated();
-
-                            context.SeedUsers();
-
-                            context.SaveChanges();
-                        }
-                    }
-
-                    _databaseInitialized = true;
-                }
-            }
         }
 
         public HttpClient CreateAuthorizedClient()

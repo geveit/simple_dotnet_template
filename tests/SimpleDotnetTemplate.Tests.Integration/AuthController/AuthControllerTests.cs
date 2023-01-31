@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Mvc.Testing;
 using SimpleDotnetTemplate.Core.Users.Dto;
 using SimpleDotnetTemplate.Tests.Integration.Common;
 
-namespace SimpleDotnetTemplate.Tests.Integration.Controllers
+namespace SimpleDotnetTemplate.Tests.Integration.AuthController
 {
     public class AuthControllerTests : IClassFixture<CustomWebApplicationFactory>
     {
@@ -17,7 +17,6 @@ namespace SimpleDotnetTemplate.Tests.Integration.Controllers
         public AuthControllerTests(CustomWebApplicationFactory factory)
         {
             _factory = factory;
-            _factory.InitDatabase();
         }
 
         [Fact]

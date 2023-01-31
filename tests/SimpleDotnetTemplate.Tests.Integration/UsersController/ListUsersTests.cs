@@ -3,25 +3,22 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http.Json;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc.Testing;
-using SimpleDotnetTemplate.Core.Users;
 using SimpleDotnetTemplate.Core.Users.Dto;
 using SimpleDotnetTemplate.Tests.Integration.Common;
 
-namespace SimpleDotnetTemplate.Tests.Integration.Controllers
+namespace SimpleDotnetTemplate.Tests.Integration.UsersController
 {
-    public class UsersControllerTests : IClassFixture<CustomWebApplicationFactory>
+    public class ListUsersTests : IClassFixture<CustomWebApplicationFactory>
     {
         private readonly CustomWebApplicationFactory _factory;
 
-        public UsersControllerTests(CustomWebApplicationFactory factory)
+        public ListUsersTests(CustomWebApplicationFactory factory)
         {
             _factory = factory;
-            _factory.InitDatabase();
         }
 
         [Fact]
-        public async Task Get_ListUsers()
+        public async Task Get_ListUsersReturnCorrectList()
         {
             var client = _factory.CreateAuthorizedClient();
 
